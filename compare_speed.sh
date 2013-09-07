@@ -4,6 +4,16 @@ print_point() {
     echo "m0=$m0 m12=$m12 a0=$a0 tan(beta)=$tan_beta sign(mu)=$sign_mu"
 }
 
+measure_time() {
+    TIMEFORMAT='%U'
+    # time=`time `
+    _start_time=`date +%s.%N`
+    $*
+    error="$?"
+    _stop_time=`date +%s.%N`
+    time=$(echo "$_stop_time - $_start_time" | bc)
+}
+
 # directory of this script
 BASEDIR=$(dirname $0)
 
@@ -46,6 +56,8 @@ if ! test -x $random_sign ; then
     exit 1
 fi
 
+echo "# m0/GeV | m12/GeV | tan(beta) | sign(mu) | A0/GeV | Softsusy time/s | Softsusy error"
+
 while [ true ]
 do
     # create point
@@ -55,7 +67,7 @@ do
     tan_beta=`$random_float 1 100`
     sign_mu=`$random_sign`
 
-    slha_file="$slha_template.point"
+    slha_file="${BASEDIR}/${slha_template}.point"
 
     cp $slha_template $slha_file
     echo "Block MINPAR\n"     \
@@ -66,5 +78,6 @@ do
          "   5   $a0"         \
         >> $slha_file
 
-    print_point
+    measure_time $ss_path leshouches < $slha_file > out 2>&1
+    echo "$m0 \t $m12 \t $tan_beta \t $sign_mu \t $a0 \t $time \t $error"
 done
