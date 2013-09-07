@@ -79,5 +79,8 @@ do
         >> $slha_file
 
     measure_time $ss_path leshouches < $slha_file > out 2>&1
-    echo "$m0 \t $m12 \t $tan_beta \t $sign_mu \t $a0 \t $time \t $error"
+    ss_time="$time"
+    ss_error="$error"
+
+    echo "$m0 \t $m12 \t $tan_beta \t $sign_mu \t $a0 \t $ss_time \t $ss_error"
 done
