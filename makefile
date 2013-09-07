@@ -15,3 +15,7 @@ all: $(exe)
 
 %.x: %.o
 	$(CXX) -o $@ $^
+
+clean:
+	rm -f out.spc
+	rm -f SPheno.spc SPheno.spc.MSSM SPheno.out Messages.out
