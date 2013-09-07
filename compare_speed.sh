@@ -112,7 +112,7 @@ do
          "   5   $a0"         \
         >> $slha_file
 
-    measure_time $ss_path leshouches < $slha_file > out.spc 2>&1
+    measure_time $ss_path leshouches < $slha_file > out.spc 2> /dev/null
     ss_time="$time"
     if test "x$error" = "x0" ; then
         valid_spectrum out.spc
