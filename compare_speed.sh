@@ -11,7 +11,7 @@ measure_time() {
     $*
     error="$?"
     _stop_time=`date +%s.%N`
-    time=$(echo "$_stop_time - $_start_time" | bc)
+    time=$(echo "$_stop_time - $_start_time" | bc | awk '{printf "%f", $0}')
 }
 
 # directory of this script
