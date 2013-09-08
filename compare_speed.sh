@@ -49,10 +49,10 @@ valid_spectrum() {
 # directory of this script
 BASEDIR=$(dirname $0)
 
-fs_path="/home/avoigt/tu/research/FlexibleSUSY/models/MSSM/run_MSSM.x"
-ss_path="/home/avoigt/packages/softsusy-3.3.9/softpoint.x"
-sp_path="/home/avoigt/packages/SPheno-3.2.3/bin/SPheno"
-spmssm_path="/home/avoigt/packages/SPheno-3.2.3/bin/SPhenoMSSM"
+fs_path="/home/avoigt/research/FlexibleSUSY/models/MSSM/run_MSSM.x"
+ss_path="/home/avoigt/research/softsusy-3.3.9/softpoint.x"
+sp_path="/home/avoigt/research/SPheno-3.2.3/bin/SPheno"
+spmssm_path="/home/avoigt/research/SPheno-3.2.3/bin/SPhenoMSSM"
 
 random_float="${BASEDIR}/random_float.x"
 random_sign="${BASEDIR}/random_sign.x"
