@@ -145,9 +145,9 @@ do
     fi
     spmssm_error="$error"
 
-    echo -e "$m0 \t $m12 \t $tan_beta \t $sign_mu \t $a0" \
-        " \t $ss_time \t $ss_error" \
-        " \t $fs_time \t $fs_error" \
-        " \t $sp_time \t $sp_error" \
-        " \t $spmssm_time \t $spmssm_error"
+    echo "$m0    $m12    $tan_beta    $sign_mu    $a0" \
+        "    $ss_time    $ss_error" \
+        "    $fs_time    $fs_error" \
+        "    $sp_time    $sp_error" \
+        "    $spmssm_time    $spmssm_error"
 done
