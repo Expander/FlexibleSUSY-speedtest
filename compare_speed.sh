@@ -5,6 +5,11 @@ print_point() {
 }
 
 measure_time() {
+    if test $# -lt 1 ; then
+        echo "measure_time: no arguments given"
+        error="1"
+    fi
+
     TIMEFORMAT='%U'
     # time=`time `
     _start_time=`date +%s.%N`
@@ -102,6 +107,7 @@ do
     rm -f out.spc SPheno.spc SPheno.spc.MSSM SPheno.out Messages.out
 
     slha_file="${BASEDIR}/${slha_template}.point"
+    error="0"
 
     cp $slha_template $slha_file
     echo "Block MINPAR\n"     \
@@ -114,28 +120,28 @@ do
 
     measure_time $ss_path leshouches < $slha_file > out.spc 2> /dev/null
     ss_time="$time"
-    if test "x$error" = "x0" ; then
+    if ! test "x$error" = "x0" ; then
         valid_spectrum out.spc
     fi
     ss_error="$error"
 
     measure_time $fs_path --slha-input-file=$slha_file --slha-output-file=out.spc > /dev/null 2>&1
     fs_time="$time"
-    if test "x$error" = "x0" ; then
+    if ! test "x$error" = "x0" ; then
         valid_spectrum out.spc
     fi
     fs_error="$error"
 
     measure_time $sp_path $slha_file > /dev/null 2>&1
     sp_time="$time"
-    if test "x$error" = "x0" ; then
+    if ! test "x$error" = "x0" ; then
         valid_spectrum SPheno.spc
     fi
     sp_error="$error"
 
     measure_time $spmssm_path $slha_file > /dev/null 2>&1
     spmssm_time="$time"
-    if test "x$error" = "x0" ; then
+    if ! test "x$error" = "x0" ; then
         valid_spectrum SPheno.spc.MSSM
     fi
     spmssm_error="$error"
