@@ -1,4 +1,5 @@
 #!/bin/sh
+TIMEFORMAT='%U'
 
 print_point() {
     echo "m0=$m0 m12=$m12 a0=$a0 tan(beta)=$tan_beta sign(mu)=$sign_mu"
@@ -10,7 +11,6 @@ measure_time() {
         error="1"
     fi
 
-    TIMEFORMAT='%U'
     # time=`time `
     _start_time=`date +%s.%N`
     $*
