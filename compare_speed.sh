@@ -11,7 +11,6 @@ measure_time() {
         error="1"
     fi
 
-    # time=`time `
     _start_time=`date +%s.%N`
     $*
     error="$?"
