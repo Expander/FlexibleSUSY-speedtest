@@ -109,13 +109,12 @@ do
     error="0"
 
     cp $slha_template $slha_file
-    echo "Block MINPAR\n"     \
-         "   1   $m0\n"       \
-         "   2   $m12\n"      \
-         "   3   $tan_beta\n" \
-         "   4   $sign_mu\n"  \
-         "   5   $a0"         \
-        >> $slha_file
+    echo "Block MINPAR"     >> $slha_file
+    echo "   1   $m0"       >> $slha_file
+    echo "   2   $m12"      >> $slha_file
+    echo "   3   $tan_beta" >> $slha_file
+    echo "   4   $sign_mu"  >> $slha_file
+    echo "   5   $a0"       >> $slha_file
 
     measure_time $ss_path leshouches < $slha_file > out.spc 2> /dev/null
     ss_time="$time"
