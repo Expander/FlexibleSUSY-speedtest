@@ -36,8 +36,8 @@ valid_spectrum() {
         return 1;
     fi
 
-    _is_valid=`awk -f valid_spectrum.awk ${_slha_file}`
-    if test "x$_is_validx" = "xyesx" ; then
+    _is_valid=`awk -f ${BASEDIR}/valid_spectrum.awk ${_slha_file}`
+    if test "x${_is_valid}x" = "xyesx" ; then
         error="0"
         return 0; # ok
     else
@@ -119,28 +119,28 @@ do
 
     measure_time $ss_path leshouches < $slha_file > out.spc 2> /dev/null
     ss_time="$time"
-    if ! test "x$error" = "x0" ; then
+    if test "x$error" = "x0" ; then
         valid_spectrum out.spc
     fi
     ss_error="$error"
 
     measure_time $fs_path --slha-input-file=$slha_file --slha-output-file=out.spc > /dev/null 2>&1
     fs_time="$time"
-    if ! test "x$error" = "x0" ; then
+    if test "x$error" = "x0" ; then
         valid_spectrum out.spc
     fi
     fs_error="$error"
 
     measure_time $sp_path $slha_file > /dev/null 2>&1
     sp_time="$time"
-    if ! test "x$error" = "x0" ; then
+    if test "x$error" = "x0" ; then
         valid_spectrum SPheno.spc
     fi
     sp_error="$error"
 
     measure_time $spmssm_path $slha_file > /dev/null 2>&1
     spmssm_time="$time"
-    if ! test "x$error" = "x0" ; then
+    if test "x$error" = "x0" ; then
         valid_spectrum SPheno.spc.MSSM
     fi
     spmssm_error="$error"
