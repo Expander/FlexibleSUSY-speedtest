@@ -90,11 +90,12 @@ if ! test -x $random_sign ; then
     exit 1
 fi
 
-echo "# m0/GeV | m12/GeV | tan(beta) | sign(mu) | A0/GeV" \
-    " | Softsusy time/s | Softsusy error" \
-    " | FlexibleSUSY time/s | FlexibleSUSY error" \
-    " | SPheno time/s | SPheno error" \
-    " | SPhenoMSSM time/s | SPhenoMSSM error"
+printf "# %20s %20s %20s %20s %20s" "m0/GeV" "m12/GeV" "tan(beta)" "sign(mu)" "A0/GeV"
+printf "%20s %20s" "Softsusy time/s" "Softsusy error"
+printf "%20s %20s" "FlexibleSUSY time/s" "FlexibleSUSY error"
+printf "%20s %20s" "SPheno time/s" "SPheno error"
+printf "%20s %20s" "SPhenoMSSM time/s" "SPhenoMSSM error"
+printf "\n"
 
 while [ true ]
 do
@@ -146,9 +147,10 @@ do
     fi
     spmssm_error="$error"
 
-    echo "$m0    $m12    $tan_beta    $sign_mu    $a0" \
-        "    $ss_time    $ss_error" \
-        "    $fs_time    $fs_error" \
-        "    $sp_time    $sp_error" \
-        "    $spmssm_time    $spmssm_error"
+    printf "  %20e %20e %20e %20i %20e" "$m0" "$m12" "$tan_beta" "$sign_mu" "$a0"
+    printf "%20g %20i" "$ss_time" "$ss_error"
+    printf "%20g %20i" "$fs_time" "$fs_error"
+    printf "%20g %20i" "$sp_time" "$sp_error"
+    printf "%20g %20i" "$spmssm_time" "$spmssm_error"
+    printf "\n"
 done
