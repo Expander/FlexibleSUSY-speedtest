@@ -1,5 +1,7 @@
 #!/bin/sh
 TIMEFORMAT='%U'
+LC_NUMERIC=C
+LC_COLLATE=C
 
 print_point() {
     echo "m0=$m0 m12=$m12 a0=$a0 tan(beta)=$tan_beta sign(mu)=$sign_mu"
@@ -7,7 +9,7 @@ print_point() {
 
 measure_time() {
     if test $# -lt 1 ; then
-        echo "measure_time: no arguments given"
+        echo "Error: measure_time: no arguments given"
         error="1"
     fi
 
@@ -20,7 +22,7 @@ measure_time() {
 
 valid_spectrum() {
     if test $# -ne 1 ; then
-        echo "valid_spectrum: only one argument accepted"
+        echo "Error: valid_spectrum: only one argument accepted"
         error="1"
         return 1;
     fi
