@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <random>
+#include <limits>
 #include <boost/lexical_cast.hpp>
 
 int main(int argc, char* argv[])
@@ -29,7 +30,7 @@ int main(int argc, char* argv[])
       return 1;
    }
 
-   std::cout.precision(15);
+   std::cout.precision(std::numeric_limits<double>::digits10);
    std::cout << number << '\n';
 
    return 0;
