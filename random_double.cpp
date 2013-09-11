@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[])
 {
-   typedef float scalar_t;
+   typedef double scalar_t;
    scalar_t number;
 
    if (argc == 1) {
@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
          start = boost::lexical_cast<scalar_t>(argv[1]);
          stop  = boost::lexical_cast<scalar_t>(argv[2]);
       } catch (const boost::bad_lexical_cast&) {
-         std::cout << "Error: cannot cast arguments to float: "
+         std::cout << "Error: cannot cast arguments to double: "
                    << argv[1] << ' ' << argv[2] << '\n';
          return 1;
       }

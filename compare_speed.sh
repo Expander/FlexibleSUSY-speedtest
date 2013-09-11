@@ -1,5 +1,7 @@
 #!/bin/sh
 TIMEFORMAT='%U'
+LC_NUMERIC=C
+LC_COLLATE=C
 
 print_point() {
     echo "m0=$m0 m12=$m12 a0=$a0 tan(beta)=$tan_beta sign(mu)=$sign_mu"
@@ -7,7 +9,7 @@ print_point() {
 
 measure_time() {
     if test $# -lt 1 ; then
-        echo "measure_time: no arguments given"
+        echo "Error: measure_time: no arguments given"
         error="1"
     fi
 
@@ -20,7 +22,7 @@ measure_time() {
 
 valid_spectrum() {
     if test $# -ne 1 ; then
-        echo "valid_spectrum: only one argument accepted"
+        echo "Error: valid_spectrum: only one argument accepted"
         error="1"
         return 1;
     fi
@@ -88,11 +90,12 @@ if ! test -x $random_sign ; then
     exit 1
 fi
 
-echo "# m0/GeV | m12/GeV | tan(beta) | sign(mu) | A0/GeV" \
-    " | Softsusy time/s | Softsusy error" \
-    " | FlexibleSUSY time/s | FlexibleSUSY error" \
-    " | SPheno time/s | SPheno error" \
-    " | SPhenoMSSM time/s | SPhenoMSSM error"
+printf "# %20s %20s %20s %20s %20s" "m0/GeV" "m12/GeV" "tan(beta)" "sign(mu)" "A0/GeV"
+printf "%20s %20s" "Softsusy time/s" "Softsusy error"
+printf "%20s %20s" "FlexibleSUSY time/s" "FlexibleSUSY error"
+printf "%20s %20s" "SPheno time/s" "SPheno error"
+printf "%20s %20s" "SPhenoMSSM time/s" "SPhenoMSSM error"
+printf "\n"
 
 while [ true ]
 do
@@ -144,9 +147,10 @@ do
     fi
     spmssm_error="$error"
 
-    echo "$m0    $m12    $tan_beta    $sign_mu    $a0" \
-        "    $ss_time    $ss_error" \
-        "    $fs_time    $fs_error" \
-        "    $sp_time    $sp_error" \
-        "    $spmssm_time    $spmssm_error"
+    printf "  %20e %20e %20e %20i %20e" "$m0" "$m12" "$tan_beta" "$sign_mu" "$a0"
+    printf "%20g %20i" "$ss_time" "$ss_error"
+    printf "%20g %20i" "$fs_time" "$fs_error"
+    printf "%20g %20i" "$sp_time" "$sp_error"
+    printf "%20g %20i" "$spmssm_time" "$spmssm_error"
+    printf "\n"
 done
