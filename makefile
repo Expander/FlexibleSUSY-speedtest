@@ -20,3 +20,4 @@ all: $(exe)
 clean:
 	rm -f out.spc
 	rm -f SPheno.spc SPheno.spc.MSSM SPheno.out Messages.out
+	rm -f *.o *.so *.d
