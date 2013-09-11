@@ -32,13 +32,14 @@ void analyze(const std::string& filename = "data.dat")
       return;
    }
 
-   TH1D* combined[4];
-   TH1D* valid[4];
-   TH1D* invalid[4];
+   const int NSG = 4;
+   TH1D* combined[NSG];
+   TH1D* valid[NSG];
+   TH1D* invalid[NSG];
 
-   ULong64_t integral_valid[4];
-   ULong64_t integral_invalid[4];
-   ULong64_t integral_combined[4];
+   ULong64_t integral_valid[NSG];
+   ULong64_t integral_invalid[NSG];
+   ULong64_t integral_combined[NSG];
 
    combined[0] = new TH1D("combined[0]", "Softsusy"    , 20, 0., 2.);
    combined[1] = new TH1D("combined[1]", "FlexibleSUSY", 20, 0., 2.);
@@ -55,14 +56,14 @@ void analyze(const std::string& filename = "data.dat")
    invalid[2] = new TH1D("invalid[2]", "SPheno"      , 20, 0., 2.);
    invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"  , 20, 0., 2.);
 
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < NSG; i++) {
       combined[i]->SetStats(0);
       valid[i]->SetStats(0);
       invalid[i]->SetStats(0);
    }
 
    // initialize integrals
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < NSG; i++) {
       integral_valid[i] = 0;
       integral_invalid[i] = 0;
       integral_combined[i] = 0;
@@ -75,11 +76,11 @@ void analyze(const std::string& filename = "data.dat")
       if (word.find("#") == std::string::npos) {
          std::istringstream kk(line);
          double m0, m12, tanb, sgnmu, a0;
-         double time[4];
-         int error[4];
+         double time[NSG];
+         int error[NSG];
 
          kk >> m0 >> m12 >> tanb >> sgnmu >> a0;
-         for (int i = 0; i < 4; i++) {
+         for (int i = 0; i < NSG; i++) {
             try {
                kk >> time[i] >> error[i];
             } catch (...) {
@@ -88,7 +89,7 @@ void analyze(const std::string& filename = "data.dat")
             }
          }
 
-         for (int i = 0; i < 4; i++) {
+         for (int i = 0; i < NSG; i++) {
             combined[i]->Fill(time[i]);
             integral_combined[i]++;
             if (error[i] == 0) {
@@ -103,7 +104,7 @@ void analyze(const std::string& filename = "data.dat")
    }
 
    // rescale
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < NSG; i++) {
       valid[i]->Scale(1./valid[i]->Integral());
       invalid[i]->Scale(1./invalid[i]->Integral());
       combined[i]->Scale(1./combined[i]->Integral());
@@ -123,7 +124,7 @@ void analyze(const std::string& filename = "data.dat")
 
    canvas->cd(1);
    valid[0]->GetYaxis()->SetRangeUser(0., 1.);
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < NSG; i++) {
       valid[i]->SetLineColor(i + 1);
       valid[i]->SetLineWidth(3);
       valid[i]->Draw(i == 0 ? "" : "same");
@@ -143,7 +144,7 @@ void analyze(const std::string& filename = "data.dat")
 
    canvas->cd(2);
    invalid[0]->GetYaxis()->SetRangeUser(0., 1.);
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < NSG; i++) {
       invalid[i]->SetLineColor(i + 1);
       invalid[i]->SetLineWidth(3);
       invalid[i]->Draw(i == 0 ? "" : "same");
@@ -163,7 +164,7 @@ void analyze(const std::string& filename = "data.dat")
 
    canvas->cd(3);
    combined[0]->GetYaxis()->SetRangeUser(0., 1.);
-   for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < NSG; i++) {
       combined[i]->SetLineColor(i + 1);
       combined[i]->SetLineWidth(3);
       combined[i]->Draw(i == 0 ? "" : "same");
