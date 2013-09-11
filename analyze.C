@@ -177,4 +177,5 @@ void analyze(const std::string& filename = "data.dat")
    combined_legend->Draw();
 
    canvas->Draw();
+   canvas->SaveAs("benchmark.pdf");
 }
