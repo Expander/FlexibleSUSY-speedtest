@@ -31,6 +31,10 @@ void analyze()
    TH1D* valid[4];
    TH1D* invalid[4];
 
+   ULong64_t integral_valid[4];
+   ULong64_t integral_invalid[4];
+   ULong64_t integral_combined[4];
+
    combined[0] = new TH1D("combined[0]", "Softsusy"    , 20, 0., 2.);
    combined[1] = new TH1D("combined[1]", "FlexibleSUSY", 20, 0., 2.);
    combined[2] = new TH1D("combined[2]", "SPheno"      , 20, 0., 2.);
@@ -50,6 +54,13 @@ void analyze()
       combined[i]->SetStats(0);
       valid[i]->SetStats(0);
       invalid[i]->SetStats(0);
+   }
+
+   // initialize integrals
+   for (int i = 0; i < 4; i++) {
+      integral_valid[i] = 0;
+      integral_invalid[i] = 0;
+      integral_combined[i] = 0;
    }
 
    while (getline(ifs,line)) {
@@ -74,26 +85,16 @@ void analyze()
 
          for (int i = 0; i < 4; i++) {
             combined[i]->Fill(time[i]);
-            if (error[i] == 0)
+            integral_combined[i]++;
+            if (error[i] == 0) {
                valid[i]->Fill(time[i]);
-            else
+               integral_valid[i]++;
+            } else {
                invalid[i]->Fill(time[i]);
+               integral_invalid[i]++;
+            }
          }
       }
-   }
-
-   ULong64_t integral_valid[4];
-   ULong64_t integral_invalid[4];
-   ULong64_t integral_combined[4];
-
-   // save integrals
-   for (int i = 0; i < 4; i++) {
-      integral_valid[i] = valid[i]->Integral();
-      integral_invalid[i] = invalid[i]->Integral();
-      integral_combined[i] = combined[i]->Integral();
-
-      if (integral_valid[i] + integral_invalid[i] != integral_combined[i])
-         cout << "Error: integral sum does not match" << endl;
    }
 
    // rescale
