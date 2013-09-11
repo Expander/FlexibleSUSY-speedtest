@@ -12,8 +12,9 @@ Block SMINPUTS               # Standard Model inputs
 Block SOFTSUSY               # SOFTSUSY specific inputs
     1   1.000000000e-04      # tolerance
     2   2                    # up-quark mixing (=1) or down (=2)
-    5   1                    # 2-loop running
     3   0                    # printout
+    5   1                    # 2-loop running
+    7   2                    # EWSB and Higgs mass loop order
 Block FlexibleSUSY
     0   1.000000000e-04      # precision goal
     1   0                    # max. iterations (0 = automatic)
