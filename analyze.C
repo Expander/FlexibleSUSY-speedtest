@@ -22,9 +22,9 @@ double get_max_y(TH1D* hist[4])
    return max_y;
 }
 
-void analyze()
+void analyze(const std::string& filename = "data.dat")
 {
-   std::ifstream ifs("data.dat");
+   std::ifstream ifs(filename.c_str());
    std::string line;
 
    TH1D* combined[4];
