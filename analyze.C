@@ -27,6 +27,11 @@ void analyze(const std::string& filename = "data.dat")
    std::ifstream ifs(filename.c_str());
    std::string line;
 
+   if (!ifs.good()) {
+      cout << "Error: could not open file: " << filename << endl;
+      return;
+   }
+
    TH1D* combined[4];
    TH1D* valid[4];
    TH1D* invalid[4];
