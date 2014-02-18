@@ -78,15 +78,27 @@ void analyze(const std::string& filename = "data.dat")
          double m0, m12, tanb, sgnmu, a0;
          double time[NSG];
          int error[NSG];
+         bool stream_ok = true;
 
          kk >> m0 >> m12 >> tanb >> sgnmu >> a0;
          for (int i = 0; i < NSG; i++) {
             try {
-               kk >> time[i] >> error[i];
+               stream_ok = kk.good();
+               if (stream_ok)
+                  kk >> time[i];
+               stream_ok = kk.good();
+               if (stream_ok)
+                  kk >> error[i];
             } catch (...) {
                cout << "Error: time and error are not convertible for"
                   " spectrum generator " << i << endl;
+               stream_ok = false;
             }
+         }
+
+         if (!stream_ok) {
+            cout << "Error: invalid line: " << line << '\n';
+            continue;
          }
 
          for (int i = 0; i < NSG; i++) {
