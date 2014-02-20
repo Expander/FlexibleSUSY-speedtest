@@ -110,14 +110,14 @@ void talk(const std::string& filename = "data.dat")
       combined[i]->Scale(1./combined[i]->Integral());
    }
 
-   combined[0]->SetTitle("CMSSM runtime/s (valid + invalid spectrum)");
-   combined[0]->GetXaxis()->SetTitle("runtime / s");
+   combined[0]->SetTitle("CMSSM run-time/s (valid + invalid spectrum)");
+   combined[0]->GetXaxis()->SetTitle("run-time / s");
 
-   valid[0]->SetTitle("CMSSM spectrum generator runtime");
-   valid[0]->GetXaxis()->SetTitle("runtime / s");
+   valid[0]->SetTitle("CMSSM spectrum generator run-time");
+   valid[0]->GetXaxis()->SetTitle("run-time / s");
 
-   invalid[0]->SetTitle("CMSSM runtime/s (invalid spectrum)");
-   invalid[0]->GetXaxis()->SetTitle("runtime / s");
+   invalid[0]->SetTitle("CMSSM run-time/s (invalid spectrum)");
+   invalid[0]->GetXaxis()->SetTitle("run-time / s");
 
    TCanvas* canvas = new TCanvas("canvas", "CMSSM benchmark", 800, 600);
    // canvas->Divide(2,2);
