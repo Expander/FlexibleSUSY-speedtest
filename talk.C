@@ -22,7 +22,8 @@ double get_max_y(TH1D* hist[4])
    return max_y;
 }
 
-void talk(const std::string& filename = "data.dat")
+void talk(const std::string& filename = "data.dat",
+          const std::string& title = "CMSSM spectrum generator run-time")
 {
    std::ifstream ifs(filename.c_str());
    std::string line;
@@ -113,7 +114,7 @@ void talk(const std::string& filename = "data.dat")
    combined[0]->SetTitle("CMSSM run-time/s (valid + invalid spectrum)");
    combined[0]->GetXaxis()->SetTitle("run-time / s");
 
-   valid[0]->SetTitle("CMSSM spectrum generator run-time");
+   valid[0]->SetTitle(title.c_str());
    valid[0]->GetXaxis()->SetTitle("run-time / s");
 
    invalid[0]->SetTitle("CMSSM run-time/s (invalid spectrum)");
