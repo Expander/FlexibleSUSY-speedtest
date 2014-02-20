@@ -34,6 +34,7 @@ void talk(const std::string& filename = "data.dat",
    }
 
    const int NSG = 4;
+   const double range_start = 0., range_stop = 1.;
    TH1D* combined[NSG];
    TH1D* valid[NSG];
    TH1D* invalid[NSG];
@@ -42,20 +43,20 @@ void talk(const std::string& filename = "data.dat",
    ULong64_t integral_invalid[NSG];
    ULong64_t integral_combined[NSG];
 
-   combined[0] = new TH1D("combined[0]", "Softsusy"    , 20, 0., 2.);
-   combined[1] = new TH1D("combined[1]", "FlexibleSUSY", 20, 0., 2.);
-   combined[2] = new TH1D("combined[2]", "SPheno"      , 20, 0., 2.);
-   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"  , 20, 0., 2.);
+   combined[0] = new TH1D("combined[0]", "Softsusy"    , 20, range_start, range_stop);
+   combined[1] = new TH1D("combined[1]", "FlexibleSUSY", 20, range_start, range_stop);
+   combined[2] = new TH1D("combined[2]", "SPheno"      , 20, range_start, range_stop);
+   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
 
-   valid[0] = new TH1D("valid[0]", "Softsusy"    , 20, 0., 2.);
-   valid[1] = new TH1D("valid[1]", "FlexibleSUSY", 20, 0., 2.);
-   valid[2] = new TH1D("valid[2]", "SPheno"      , 20, 0., 2.);
-   valid[3] = new TH1D("valid[3]", "SPhenoMSSM"  , 20, 0., 2.);
+   valid[0] = new TH1D("valid[0]", "Softsusy"    , 20, range_start, range_stop);
+   valid[1] = new TH1D("valid[1]", "FlexibleSUSY", 20, range_start, range_stop);
+   valid[2] = new TH1D("valid[2]", "SPheno"      , 20, range_start, range_stop);
+   valid[3] = new TH1D("valid[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
 
-   invalid[0] = new TH1D("invalid[0]", "Softsusy"    , 20, 0., 2.);
-   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY", 20, 0., 2.);
-   invalid[2] = new TH1D("invalid[2]", "SPheno"      , 20, 0., 2.);
-   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"  , 20, 0., 2.);
+   invalid[0] = new TH1D("invalid[0]", "Softsusy"    , 20, range_start, range_stop);
+   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY", 20, range_start, range_stop);
+   invalid[2] = new TH1D("invalid[2]", "SPheno"      , 20, range_start, range_stop);
+   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
 
    for (int i = 0; i < NSG; i++) {
       combined[i]->SetStats(0);
@@ -124,7 +125,7 @@ void talk(const std::string& filename = "data.dat",
    // canvas->Divide(2,2);
 
    canvas->cd(1);
-   valid[0]->GetYaxis()->SetRangeUser(0., 1.);
+   valid[0]->GetYaxis()->SetRangeUser(range_start, range_stop);
    for (int i = 0; i < NSG; i++) {
       valid[i]->SetLineWidth(3);
       valid[i]->Draw(i == 0 ? "" : "same");
