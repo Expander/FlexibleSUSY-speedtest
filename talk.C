@@ -48,10 +48,10 @@ void talk(const std::string& filename = "data.dat",
    combined[2] = new TH1D("combined[2]", "SPheno"      , 20, range_start, range_stop);
    combined[3] = new TH1D("combined[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
 
-   valid[0] = new TH1D("valid[0]", "Softsusy"    , 20, range_start, range_stop);
-   valid[1] = new TH1D("valid[1]", "FlexibleSUSY", 20, range_start, range_stop);
-   valid[2] = new TH1D("valid[2]", "SPheno"      , 20, range_start, range_stop);
-   valid[3] = new TH1D("valid[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
+   valid[0] = new TH1D("valid[0]", "Softsusy 3.4.0"    , 20, range_start, range_stop);
+   valid[1] = new TH1D("valid[1]", "FlexibleSUSY 0.5.3", 20, range_start, range_stop);
+   valid[2] = new TH1D("valid[2]", "SPheno 3.2.4"      , 20, range_start, range_stop);
+   valid[3] = new TH1D("valid[3]", "SPhenoMSSM 4.1.0"  , 20, range_start, range_stop);
 
    invalid[0] = new TH1D("invalid[0]", "Softsusy"    , 20, range_start, range_stop);
    invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY", 20, range_start, range_stop);
@@ -136,10 +136,10 @@ void talk(const std::string& filename = "data.dat",
    valid[2]->SetLineColor(4); valid[2]->SetFillColor(4); valid[2]->SetFillStyle(3005);
    valid[3]->SetLineColor(2); valid[3]->SetFillColor(2); valid[3]->SetFillStyle(3006);
 
-   TLegend *valid_legend = new TLegend(0.6,0.7,0.9,0.9);
+   TLegend *valid_legend = new TLegend(0.5,0.7,0.9,0.9);
    valid_legend->SetFillColor(0);
    valid_legend->AddEntry(valid[1], TString::Format("%s (%3.3fs)", valid[1]->GetTitle(), valid[1]->GetMean()), "f");
-   valid_legend->AddEntry(valid[0], TString::Format("%s (%3.3fs)", "Softsusy"          , valid[0]->GetMean()), "f");
+   valid_legend->AddEntry(valid[0], TString::Format("%s (%3.3fs)", "Softsusy 3.4.0"    , valid[0]->GetMean()), "f");
    valid_legend->AddEntry(valid[2], TString::Format("%s (%3.3fs)", valid[2]->GetTitle(), valid[2]->GetMean()), "f");
    valid_legend->AddEntry(valid[3], TString::Format("%s (%3.3fs)", valid[3]->GetTitle(), valid[3]->GetMean()), "f");
    valid_legend->Draw();
