@@ -49,7 +49,7 @@ void talk(const std::string& filename = "data.dat",
    combined[3] = new TH1D("combined[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
 
    valid[0] = new TH1D("valid[0]", "Softsusy 3.4.0"    , 20, range_start, range_stop);
-   valid[1] = new TH1D("valid[1]", "FlexibleSUSY 0.5.3", 20, range_start, range_stop);
+   valid[1] = new TH1D("valid[1]", "FlexibleSUSY 0.5.4", 20, range_start, range_stop);
    valid[2] = new TH1D("valid[2]", "SPheno 3.2.4"      , 20, range_start, range_stop);
    valid[3] = new TH1D("valid[3]", "SPhenoMSSM 4.1.0"  , 20, range_start, range_stop);
 
@@ -146,4 +146,5 @@ void talk(const std::string& filename = "data.dat",
 
    canvas->Draw();
    canvas->SaveAs("benchmark.pdf");
+   canvas->SaveAs("benchmark.png");
 }
