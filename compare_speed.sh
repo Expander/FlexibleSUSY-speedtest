@@ -52,6 +52,7 @@ valid_spectrum() {
 BASEDIR=$(dirname $0)
 
 fs_path="./run_MSSM.x"
+fsnofv_path="./run_MSSMNoFV.x"
 ss_path="./softpoint.x"
 sp_path="./SPheno"
 spmssm_path="./SPhenoMSSM"
@@ -62,7 +63,11 @@ random_sign="${BASEDIR}/random_sign.x"
 slha_template="${BASEDIR}/mssm_generic.slha2"
 
 if ! test -x $fs_path ; then
-    echo "Error: FlexibleSUSY executable not found: $fs_path"
+    echo "Error: FlexibleSUSY MSSM executable not found: $fs_path"
+    exit 1
+fi
+if ! test -x $fsnofv_path ; then
+    echo "Error: FlexibleSUSY MSSMNoFV executable not found: $fsnofv_path"
     exit 1
 fi
 if ! test -x $ss_path ; then
@@ -95,6 +100,7 @@ printf "%20s %20s" "Softsusy time/s" "Softsusy error"
 printf "%20s %20s" "FlexibleSUSY time/s" "FlexibleSUSY error"
 printf "%20s %20s" "SPheno time/s" "SPheno error"
 printf "%20s %20s" "SPhenoMSSM time/s" "SPhenoMSSM error"
+printf "%20s %20s" "FlexibleSUSY-NoFV time/s" "FlexibleSUSY-NoFV error"
 printf "\n"
 
 while [ true ]
@@ -133,6 +139,13 @@ do
     fi
     fs_error="$error"
 
+    measure_time $fsnofv_path --slha-input-file=$slha_file --slha-output-file=out.spc > /dev/null 2>&1
+    fsnofv_time="$time"
+    if test "x$error" = "x0" ; then
+        valid_spectrum out.spc
+    fi
+    fsnofv_error="$error"
+
     measure_time $sp_path $slha_file > /dev/null 2>&1
     sp_time="$time"
     if test "x$error" = "x0" ; then
@@ -152,5 +165,6 @@ do
     printf "%20g %20i" "$fs_time" "$fs_error"
     printf "%20g %20i" "$sp_time" "$sp_error"
     printf "%20g %20i" "$spmssm_time" "$spmssm_error"
+    printf "%20g %20i" "$fsnofv_time" "$fsnofv_error"
     printf "\n"
 done
