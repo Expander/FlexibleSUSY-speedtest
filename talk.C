@@ -33,7 +33,7 @@ void talk(const std::string& filename = "data.dat",
       return;
    }
 
-   const int NSG = 4;
+   const int NSG = 5;
    const double range_start = 0., range_stop = 1.;
    TH1D* combined[NSG];
    TH1D* valid[NSG];
@@ -43,20 +43,23 @@ void talk(const std::string& filename = "data.dat",
    ULong64_t integral_invalid[NSG];
    ULong64_t integral_combined[NSG];
 
-   combined[0] = new TH1D("combined[0]", "Softsusy"    , 20, range_start, range_stop);
-   combined[1] = new TH1D("combined[1]", "FlexibleSUSY", 20, range_start, range_stop);
-   combined[2] = new TH1D("combined[2]", "SPheno"      , 20, range_start, range_stop);
-   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
+   combined[0] = new TH1D("combined[0]", "Softsusy"         , 20, range_start, range_stop);
+   combined[1] = new TH1D("combined[1]", "FlexibleSUSY-FV"  , 20, range_start, range_stop);
+   combined[2] = new TH1D("combined[2]", "SPheno"           , 20, range_start, range_stop);
+   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"       , 20, range_start, range_stop);
+   combined[4] = new TH1D("combined[4]", "FlexibleSUSY-NoFV", 20, range_start, range_stop);
 
-   valid[0] = new TH1D("valid[0]", "Softsusy 3.4.0"    , 20, range_start, range_stop);
-   valid[1] = new TH1D("valid[1]", "FlexibleSUSY 0.5.4", 20, range_start, range_stop);
-   valid[2] = new TH1D("valid[2]", "SPheno 3.2.4"      , 20, range_start, range_stop);
-   valid[3] = new TH1D("valid[3]", "SPhenoMSSM 4.1.0"  , 20, range_start, range_stop);
+   valid[0] = new TH1D("valid[0]", "Softsusy 3.4.0"         , 20, range_start, range_stop);
+   valid[1] = new TH1D("valid[1]", "FlexibleSUSY-FV 0.5.4"  , 20, range_start, range_stop);
+   valid[2] = new TH1D("valid[2]", "SPheno 3.2.4"           , 20, range_start, range_stop);
+   valid[3] = new TH1D("valid[3]", "SPhenoMSSM 4.1.0"       , 20, range_start, range_stop);
+   valid[4] = new TH1D("valid[4]", "FlexibleSUSY-NoFV 0.5.4", 20, range_start, range_stop);
 
-   invalid[0] = new TH1D("invalid[0]", "Softsusy"    , 20, range_start, range_stop);
-   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY", 20, range_start, range_stop);
-   invalid[2] = new TH1D("invalid[2]", "SPheno"      , 20, range_start, range_stop);
-   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"  , 20, range_start, range_stop);
+   invalid[0] = new TH1D("invalid[0]", "Softsusy"         , 20, range_start, range_stop);
+   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY-FV"  , 20, range_start, range_stop);
+   invalid[2] = new TH1D("invalid[2]", "SPheno"           , 20, range_start, range_stop);
+   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"       , 20, range_start, range_stop);
+   invalid[4] = new TH1D("invalid[4]", "FlexibleSUSY-NoFV", 20, range_start, range_stop);
 
    for (int i = 0; i < NSG; i++) {
       combined[i]->SetStats(0);
@@ -135,10 +138,12 @@ void talk(const std::string& filename = "data.dat",
    valid[1]->SetLineColor(3); valid[1]->SetFillColor(3); valid[1]->SetFillStyle(3001);
    valid[2]->SetLineColor(4); valid[2]->SetFillColor(4); valid[2]->SetFillStyle(3005);
    valid[3]->SetLineColor(2); valid[3]->SetFillColor(2); valid[3]->SetFillStyle(3006);
+   valid[4]->SetLineColor(8); valid[4]->SetFillColor(8); valid[4]->SetFillStyle(3007);
 
-   TLegend *valid_legend = new TLegend(0.5,0.7,0.9,0.9);
+   TLegend *valid_legend = new TLegend(0.4,0.6,0.9,0.9);
    valid_legend->SetFillColor(0);
    valid_legend->AddEntry(valid[1], TString::Format("%s (%3.3fs)", valid[1]->GetTitle(), valid[1]->GetMean()), "f");
+   valid_legend->AddEntry(valid[4], TString::Format("%s (%3.3fs)", valid[4]->GetTitle(), valid[4]->GetMean()), "f");
    valid_legend->AddEntry(valid[0], TString::Format("%s (%3.3fs)", "Softsusy 3.4.0"    , valid[0]->GetMean()), "f");
    valid_legend->AddEntry(valid[2], TString::Format("%s (%3.3fs)", valid[2]->GetTitle(), valid[2]->GetMean()), "f");
    valid_legend->AddEntry(valid[3], TString::Format("%s (%3.3fs)", valid[3]->GetTitle(), valid[3]->GetMean()), "f");
