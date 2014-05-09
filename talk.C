@@ -137,7 +137,7 @@ void talk(const std::string& filename = "data.dat",
    valid[0]->SetLineColor(1); valid[0]->SetFillColor(1); valid[0]->SetFillStyle(3004);
    valid[1]->SetLineColor(3); valid[1]->SetFillColor(3); valid[1]->SetFillStyle(3001);
    valid[2]->SetLineColor(4); valid[2]->SetFillColor(4); valid[2]->SetFillStyle(3005);
-   valid[3]->SetLineColor(2); valid[3]->SetFillColor(2); valid[3]->SetFillStyle(3006);
+   valid[3]->SetLineColor(2); valid[3]->SetFillColor(2); valid[3]->SetFillStyle(3001);
    valid[4]->SetLineColor(8); valid[4]->SetFillColor(8); valid[4]->SetFillStyle(3007);
 
    TLegend *valid_legend_nofv = new TLegend(0.4,0.7,0.9,0.9);
