@@ -147,11 +147,11 @@ void talk(const std::string& filename = "data.dat",
    valid_legend_nofv->AddEntry(valid[0], TString::Format("%s (%3.3fs)", "Softsusy 3.4.0"    , valid[0]->GetMean()), "f");
    valid_legend_nofv->Draw();
 
-   TLegend *valid_legend = new TLegend(0.4,0.58,0.9,0.7);
-   valid_legend->SetFillColor(0);
-   valid_legend->AddEntry(valid[1], TString::Format("%s (%3.3fs)", valid[1]->GetTitle(), valid[1]->GetMean()), "f");
-   valid_legend->AddEntry(valid[3], TString::Format("%s (%3.3fs)", valid[3]->GetTitle(), valid[3]->GetMean()), "f");
-   valid_legend->Draw();
+   TLegend *valid_legend_fv = new TLegend(0.4,0.58,0.9,0.7);
+   valid_legend_fv->SetFillColor(0);
+   valid_legend_fv->AddEntry(valid[1], TString::Format("%s (%3.3fs)", valid[1]->GetTitle(), valid[1]->GetMean()), "f");
+   valid_legend_fv->AddEntry(valid[3], TString::Format("%s (%3.3fs)", valid[3]->GetTitle(), valid[3]->GetMean()), "f");
+   valid_legend_fv->Draw();
 
    canvas->Draw();
    canvas->SaveAs("benchmark.pdf");
