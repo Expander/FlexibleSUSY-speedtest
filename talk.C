@@ -140,12 +140,16 @@ void talk(const std::string& filename = "data.dat",
    valid[3]->SetLineColor(2); valid[3]->SetFillColor(2); valid[3]->SetFillStyle(3006);
    valid[4]->SetLineColor(8); valid[4]->SetFillColor(8); valid[4]->SetFillStyle(3007);
 
-   TLegend *valid_legend = new TLegend(0.4,0.6,0.9,0.9);
+   TLegend *valid_legend_nofv = new TLegend(0.4,0.7,0.9,0.9);
+   valid_legend_nofv->SetFillColor(0);
+   valid_legend_nofv->AddEntry(valid[4], TString::Format("%s (%3.3fs)", valid[4]->GetTitle(), valid[4]->GetMean()), "f");
+   valid_legend_nofv->AddEntry(valid[2], TString::Format("%s (%3.3fs)", valid[2]->GetTitle(), valid[2]->GetMean()), "f");
+   valid_legend_nofv->AddEntry(valid[0], TString::Format("%s (%3.3fs)", "Softsusy 3.4.0"    , valid[0]->GetMean()), "f");
+   valid_legend_nofv->Draw();
+
+   TLegend *valid_legend = new TLegend(0.4,0.58,0.9,0.7);
    valid_legend->SetFillColor(0);
    valid_legend->AddEntry(valid[1], TString::Format("%s (%3.3fs)", valid[1]->GetTitle(), valid[1]->GetMean()), "f");
-   valid_legend->AddEntry(valid[4], TString::Format("%s (%3.3fs)", valid[4]->GetTitle(), valid[4]->GetMean()), "f");
-   valid_legend->AddEntry(valid[0], TString::Format("%s (%3.3fs)", "Softsusy 3.4.0"    , valid[0]->GetMean()), "f");
-   valid_legend->AddEntry(valid[2], TString::Format("%s (%3.3fs)", valid[2]->GetTitle(), valid[2]->GetMean()), "f");
    valid_legend->AddEntry(valid[3], TString::Format("%s (%3.3fs)", valid[3]->GetTitle(), valid[3]->GetMean()), "f");
    valid_legend->Draw();
 
