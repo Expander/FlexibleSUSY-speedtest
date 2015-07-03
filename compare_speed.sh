@@ -51,8 +51,8 @@ valid_spectrum() {
 # directory of this script
 BASEDIR=$(dirname $0)
 
-fs_path="./run_MSSM.x"
-fsnofv_path="./run_MSSMNoFV.x"
+fs_path="./run_CMSSM.x"
+fsnofv_path="./run_CMSSMNoFV.x"
 ss_path="./softpoint.x"
 sp_path="./SPheno"
 spmssm_path="./SPhenoMSSM"
@@ -63,11 +63,11 @@ random_sign="${BASEDIR}/random_sign.x"
 slha_template="${BASEDIR}/mssm_generic.slha2"
 
 if ! test -x $fs_path ; then
-    echo "Error: FlexibleSUSY MSSM executable not found: $fs_path"
+    echo "Error: FlexibleSUSY CMSSM executable not found: $fs_path"
     exit 1
 fi
 if ! test -x $fsnofv_path ; then
-    echo "Error: FlexibleSUSY MSSMNoFV executable not found: $fsnofv_path"
+    echo "Error: FlexibleSUSY CMSSMNoFV executable not found: $fsnofv_path"
     exit 1
 fi
 if ! test -x $ss_path ; then
@@ -95,12 +95,16 @@ if ! test -x $random_sign ; then
     exit 1
 fi
 
+printf "# SS = SoftSUSY (no FV)\n"
+printf "# FS = FlexibleSUSY (FV)\n"
+printf "# SP = SPheno (no FV)\n"
+printf "# SSP = SARAH/SPheno (FV)\n"
 printf "# %20s %20s %20s %20s %20s" "m0/GeV" "m12/GeV" "tan(beta)" "sign(mu)" "A0/GeV"
-printf "%20s %20s" "Softsusy time/s" "Softsusy error"
-printf "%20s %20s" "FlexibleSUSY time/s" "FlexibleSUSY error"
-printf "%20s %20s" "SPheno time/s" "SPheno error"
-printf "%20s %20s" "SPhenoMSSM time/s" "SPhenoMSSM error"
-printf "%20s %20s" "FlexibleSUSY-NoFV time/s" "FlexibleSUSY-NoFV error"
+printf "%20s %20s" "SS time/s" "SS error"
+printf "%20s %20s" "FS time/s" "FS error"
+printf "%20s %20s" "SP time/s" "SP error"
+printf "%20s %20s" "SSP time/s" "SSP error"
+printf "%20s %20s" "FS-NoFV time/s" "FS-NoFV error"
 printf "\n"
 
 while [ true ]
