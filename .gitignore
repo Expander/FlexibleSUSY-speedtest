@@ -3,3 +3,8 @@
 *.x
 *.d
 *.so
+out.spc
+SPheno
+SPhenoMSSM
+fort.10
+mssm_generic.slha2.point
