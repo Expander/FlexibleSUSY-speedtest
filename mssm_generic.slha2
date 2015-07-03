@@ -15,6 +15,9 @@ Block SOFTSUSY               # SOFTSUSY specific inputs
     3   0                    # printout
     5   1                    # 2-loop running
     7   2                    # EWSB and Higgs mass loop order
+   19   0                    # Include 3-loop SUSY RGEs
+   20   0                    # Include 2-loop gauge/Yukawa thresholds
+   22   0                    # Include 2-loop sparticle mass thresholds
 Block FlexibleSUSY
     0   1.000000000e-04      # precision goal
     1   0                    # max. iterations (0 = automatic)
@@ -22,9 +25,18 @@ Block FlexibleSUSY
     3   0                    # calculate SM pole masses
     4   2                    # pole mass loop order
     5   2                    # EWSB loop order
+    6   2                    # beta-functions loop order
+    7   2                    # threshold corrections loop order
+    8   1                    # Higgs 2-loop corrections O(alpha_t alpha_s)
+    9   1                    # Higgs 2-loop corrections O(alpha_b alpha_s)
+   10   1                    # Higgs 2-loop corrections O((alpha_t + alpha_b)^2)
+   11   1                    # Higgs 2-loop corrections O(alpha_tau^2)
+   12   0                    # force output
+   13   1                    # Top quark 2-loop corrections QCD
+   14   1.000000000e-11      # beta-function zero threshold
 Block SPhenoInput            # SPheno specific input
     1  -1                    # error level
-    2   1                    # SPA conventions
+    2   0                    # SPA conventions
     11  0                    # calculate branching ratios
     13  0                    # include 3-Body decays
     12  1.000E-04            # write only branching ratios larger than this value
@@ -37,7 +49,7 @@ Block SPhenoInput            # SPheno specific input
     50  1                    # Majorana phases: use only positive masses
     51  0                    # Write Output in CKM basis
     52  0                    # Write spectrum in case of tachyonic states
-    55  1                    # Calculate one loop masses
+#    55  1                    # Calculate one loop masses
     57  0                    # Calculate low energy constraints
     60  0                    # Include possible, kinetic mixing
     65  1                    # Solution tadpole equation
