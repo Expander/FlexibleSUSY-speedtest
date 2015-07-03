@@ -95,10 +95,13 @@ if ! test -x $random_sign ; then
     exit 1
 fi
 
-printf "# SS = SoftSUSY (no FV)\n"
-printf "# FS = FlexibleSUSY (FV)\n"
-printf "# SP = SPheno (no FV)\n"
-printf "# SSP = SARAH/SPheno (FV)\n"
+fs_version=$($fs_path --version)
+ss_version=$($ss_path --version 2>&1)
+
+printf "# SS = ${ss_version} (no FV)\n"
+printf "# FS = ${fs_version} (FV)\n"
+printf "# SP = SPheno 3.3.7 (no FV)\n"
+printf "# SSP = SPheno 3.3.7 with SARAH 4.5.8 (FV)\n"
 printf "# %20s %20s %20s %20s %20s" "m0/GeV" "m12/GeV" "tan(beta)" "sign(mu)" "A0/GeV"
 printf "%20s %20s" "SS time/s" "SS error"
 printf "%20s %20s" "FS time/s" "FS error"
