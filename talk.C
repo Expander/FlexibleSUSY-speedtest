@@ -34,7 +34,8 @@ struct HistStyle {
 void draw(const std::string& title, const std::vector<TH1D*>& histograms,
           const std::string& filename)
 {
-   if (histograms.empty() || histograms.size() > 4)
+   if (histograms.empty() ||
+       histograms.size() > (sizeof(hist_style)/sizeof(hist_style[0])))
       return;
 
    TCanvas* canvas = new TCanvas("canvas", title.c_str(), 800, 600);
