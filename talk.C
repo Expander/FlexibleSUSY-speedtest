@@ -9,19 +9,6 @@
 #include "TLegend.h"
 #include "TString.h"
 
-double get_max_y(TH1D* hist[4])
-{
-   double max_y = DBL_MIN;
-
-   for (int i = 0; i < 4; i++) {
-      double max = hist[i]->GetBinContent(hist[i]->GetMaximumBin());
-      if (max > max_y)
-         max_y = max;
-   }
-
-   return max_y;
-}
-
 struct HistStyle {
    int linecolor, fillcolor, fillstyle;
 } hist_style[] = {
