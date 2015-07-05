@@ -113,7 +113,7 @@ void talk(const std::string& filename = "data.dat",
       std::istringstream input(line);
       std::string word;
       input >> word;
-      if (word == "" || word.find("#") == std::string::npos) {
+      if (word != "" && word[0] != '#') {
          std::istringstream kk(line);
          double m0, m12, tanb, sgnmu, a0;
          double time[NSG];
