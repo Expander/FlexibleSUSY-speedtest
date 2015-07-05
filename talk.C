@@ -22,6 +22,53 @@ double get_max_y(TH1D* hist[4])
    return max_y;
 }
 
+struct HistStyle {
+   int linecolor, fillcolor, fillstyle;
+} hist_style[] = {
+   {3, 3, 3004},
+   {4, 4, 3005},
+   {2, 2, 3007},
+   {8, 8, 3001}
+};
+
+void draw(const std::string& title, const std::vector<TH1D*>& histograms,
+          const std::string& filename)
+{
+   if (histograms.empty() || histograms.size() > 4)
+      return;
+
+   TCanvas* canvas = new TCanvas("canvas", title.c_str(), 800, 600);
+   canvas->cd(1)->SetTitle(title.c_str());
+
+   histograms[0]->GetYaxis()->SetRangeUser(0., 1.);
+   for (int i = 0; i < histograms.size(); i++) {
+      histograms[i]->SetLineWidth(3);
+      histograms[i]->SetLineColor(hist_style[i].linecolor);
+      histograms[i]->SetFillColor(hist_style[i].fillcolor);
+      histograms[i]->SetFillStyle(hist_style[i].fillstyle);
+      histograms[i]->Draw(i == 0 ? "" : "same");
+   }
+
+   TLegend *legend = new TLegend(0.4,0.7,0.9,0.9);
+   legend->SetFillColor(0);
+   for (int i = 0; i < histograms.size(); i++) {
+      legend->AddEntry(histograms[i],
+                       TString::Format("%s (%3.3fs)", histograms[i]->GetTitle(), histograms[i]->GetMean()),
+                       "f");
+   }
+   legend->Draw();
+
+   histograms[0]->SetTitle(title.c_str());
+   histograms[0]->GetXaxis()->SetTitle("run-time / s");
+
+   canvas->Draw();
+   canvas->SaveAs(TString(filename) + ".pdf");
+   canvas->SaveAs(TString(filename) + ".png");
+
+   delete legend;
+   delete canvas;
+}
+
 void talk(const std::string& filename = "data.dat",
           const std::string& title = "CMSSM spectrum generator run-time")
 {
@@ -43,23 +90,23 @@ void talk(const std::string& filename = "data.dat",
    ULong64_t integral_invalid[NSG];
    ULong64_t integral_combined[NSG];
 
-   combined[0] = new TH1D("combined[0]", "Softsusy"         , 20, range_start, range_stop);
-   combined[1] = new TH1D("combined[1]", "FlexibleSUSY-FV"  , 20, range_start, range_stop);
-   combined[2] = new TH1D("combined[2]", "SPheno"           , 20, range_start, range_stop);
-   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"       , 20, range_start, range_stop);
-   combined[4] = new TH1D("combined[4]", "FlexibleSUSY-NoFV", 20, range_start, range_stop);
+   combined[0] = new TH1D("combined[0]", "Softsusy 3.6.2"        , 20, range_start, range_stop);
+   combined[1] = new TH1D("combined[1]", "FlexibleSUSY-CMSSM"    , 20, range_start, range_stop);
+   combined[2] = new TH1D("combined[2]", "SPheno 3.3.7"          , 20, range_start, range_stop);
+   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"            , 20, range_start, range_stop);
+   combined[4] = new TH1D("combined[4]", "FlexibleSUSY-CMSSMNoFV", 20, range_start, range_stop);
 
-   valid[0] = new TH1D("valid[0]", "Softsusy 3.4.0"         , 20, range_start, range_stop);
-   valid[1] = new TH1D("valid[1]", "FlexibleSUSY-FV 1.0.0"  , 20, range_start, range_stop);
-   valid[2] = new TH1D("valid[2]", "SPheno 3.2.4"           , 20, range_start, range_stop);
-   valid[3] = new TH1D("valid[3]", "SPhenoMSSM 4.1.0"       , 20, range_start, range_stop);
-   valid[4] = new TH1D("valid[4]", "FlexibleSUSY-NoFV 1.0.0", 20, range_start, range_stop);
+   valid[0] = new TH1D("valid[0]", "Softsusy 3.6.2"              , 20, range_start, range_stop);
+   valid[1] = new TH1D("valid[1]", "FlexibleSUSY-CMSSM 1.2.0"    , 20, range_start, range_stop);
+   valid[2] = new TH1D("valid[2]", "SPheno 3.3.7"                , 20, range_start, range_stop);
+   valid[3] = new TH1D("valid[3]", "SPhenoMSSM 3.3.7/4.5.8"      , 20, range_start, range_stop);
+   valid[4] = new TH1D("valid[4]", "FlexibleSUSY-CMSSMNoFV 1.2.0", 20, range_start, range_stop);
 
-   invalid[0] = new TH1D("invalid[0]", "Softsusy"         , 20, range_start, range_stop);
-   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY-FV"  , 20, range_start, range_stop);
-   invalid[2] = new TH1D("invalid[2]", "SPheno"           , 20, range_start, range_stop);
-   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"       , 20, range_start, range_stop);
-   invalid[4] = new TH1D("invalid[4]", "FlexibleSUSY-NoFV", 20, range_start, range_stop);
+   invalid[0] = new TH1D("invalid[0]", "Softsusy"              , 20, range_start, range_stop);
+   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY-CMSSM"    , 20, range_start, range_stop);
+   invalid[2] = new TH1D("invalid[2]", "SPheno"                , 20, range_start, range_stop);
+   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"            , 20, range_start, range_stop);
+   invalid[4] = new TH1D("invalid[4]", "FlexibleSUSY-CMSSMNoFV", 20, range_start, range_stop);
 
    for (int i = 0; i < NSG; i++) {
       combined[i]->SetStats(0);
@@ -78,7 +125,7 @@ void talk(const std::string& filename = "data.dat",
       std::istringstream input(line);
       std::string word;
       input >> word;
-      if (word.find("#") == std::string::npos) {
+      if (word == "" || word.find("#") == std::string::npos) {
          std::istringstream kk(line);
          double m0, m12, tanb, sgnmu, a0;
          double time[NSG];
@@ -115,45 +162,16 @@ void talk(const std::string& filename = "data.dat",
       combined[i]->Scale(1./combined[i]->Integral());
    }
 
-   combined[0]->SetTitle("CMSSM run-time/s (valid + invalid spectrum)");
-   combined[0]->GetXaxis()->SetTitle("run-time / s");
+   std::vector<TH1D*> nofv_hists;
+   nofv_hists.push_back(valid[4]); // FS
+   nofv_hists.push_back(valid[2]); // SP
+   nofv_hists.push_back(valid[0]); // SS
 
-   valid[0]->SetTitle(title.c_str());
-   valid[0]->GetXaxis()->SetTitle("run-time / s");
+   draw("CMSSM w/o sfermion flavour violation", nofv_hists, "benchmark_nofv");
 
-   invalid[0]->SetTitle("CMSSM run-time/s (invalid spectrum)");
-   invalid[0]->GetXaxis()->SetTitle("run-time / s");
+   std::vector<TH1D*> fv_hists;
+   fv_hists.push_back(valid[1]); // FS
+   fv_hists.push_back(valid[3]); // S/SP
 
-   TCanvas* canvas = new TCanvas("canvas", "CMSSM benchmark", 800, 600);
-   // canvas->Divide(2,2);
-
-   canvas->cd(1);
-   valid[0]->GetYaxis()->SetRangeUser(range_start, range_stop);
-   for (int i = 0; i < NSG; i++) {
-      valid[i]->SetLineWidth(3);
-      valid[i]->Draw(i == 0 ? "" : "same");
-   }
-
-   valid[0]->SetLineColor(1); valid[0]->SetFillColor(1); valid[0]->SetFillStyle(3004);
-   valid[1]->SetLineColor(3); valid[1]->SetFillColor(3); valid[1]->SetFillStyle(3001);
-   valid[2]->SetLineColor(4); valid[2]->SetFillColor(4); valid[2]->SetFillStyle(3005);
-   valid[3]->SetLineColor(2); valid[3]->SetFillColor(2); valid[3]->SetFillStyle(3001);
-   valid[4]->SetLineColor(8); valid[4]->SetFillColor(8); valid[4]->SetFillStyle(3007);
-
-   TLegend *valid_legend_nofv = new TLegend(0.4,0.7,0.9,0.9);
-   valid_legend_nofv->SetFillColor(0);
-   valid_legend_nofv->AddEntry(valid[4], TString::Format("%s (%3.3fs)", valid[4]->GetTitle(), valid[4]->GetMean()), "f");
-   valid_legend_nofv->AddEntry(valid[2], TString::Format("%s (%3.3fs)", valid[2]->GetTitle(), valid[2]->GetMean()), "f");
-   valid_legend_nofv->AddEntry(valid[0], TString::Format("%s (%3.3fs)", "Softsusy 3.4.0"    , valid[0]->GetMean()), "f");
-   valid_legend_nofv->Draw();
-
-   TLegend *valid_legend_fv = new TLegend(0.4,0.58,0.9,0.7);
-   valid_legend_fv->SetFillColor(0);
-   valid_legend_fv->AddEntry(valid[1], TString::Format("%s (%3.3fs)", valid[1]->GetTitle(), valid[1]->GetMean()), "f");
-   valid_legend_fv->AddEntry(valid[3], TString::Format("%s (%3.3fs)", valid[3]->GetTitle(), valid[3]->GetMean()), "f");
-   valid_legend_fv->Draw();
-
-   canvas->Draw();
-   canvas->SaveAs("benchmark.pdf");
-   canvas->SaveAs("benchmark.png");
+   draw("CMSSM w/ sfermion flavour violation", fv_hists, "benchmark_fv");
 }
