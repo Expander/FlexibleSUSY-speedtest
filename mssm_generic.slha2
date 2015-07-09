@@ -37,6 +37,10 @@ Block FlexibleSUSY
 Block SPhenoInput            # SPheno specific input
     1  -1                    # error level
     2   0                    # SPA conventions
+    7   0                    # Skip two-loop masses (0=don't skip)
+    8   9                    # 1=numeric deriv., 2=analytic deriv., 9=slavich routines
+    9   1                    # gauge-less limit
+    10  0                    # safe mode
     11  0                    # calculate branching ratios
     13  0                    # include 3-Body decays
     12  1.000E-04            # write only branching ratios larger than this value
