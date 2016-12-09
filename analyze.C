@@ -22,7 +22,7 @@ double get_max_y(TH1D* hist[4])
    return max_y;
 }
 
-void analyze(const std::string& filename = "data.dat")
+void analyze(const std::string& filename = "data.dat", double xmin = 0, double xmax = 1.)
 {
    std::ifstream ifs(filename.c_str());
    std::string line;
@@ -41,20 +41,20 @@ void analyze(const std::string& filename = "data.dat")
    ULong64_t integral_invalid[NSG];
    ULong64_t integral_combined[NSG];
 
-   combined[0] = new TH1D("combined[0]", "Softsusy"    , 20, 0., 2.);
-   combined[1] = new TH1D("combined[1]", "FlexibleSUSY", 20, 0., 2.);
-   combined[2] = new TH1D("combined[2]", "SPheno"      , 20, 0., 2.);
-   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"  , 20, 0., 2.);
+   combined[0] = new TH1D("combined[0]", "Softsusy"    , 20, xmin, xmax);
+   combined[1] = new TH1D("combined[1]", "FlexibleSUSY", 20, xmin, xmax);
+   combined[2] = new TH1D("combined[2]", "SPheno"      , 20, xmin, xmax);
+   combined[3] = new TH1D("combined[3]", "SPhenoMSSM"  , 20, xmin, xmax);
 
-   valid[0] = new TH1D("valid[0]", "Softsusy"    , 20, 0., 2.);
-   valid[1] = new TH1D("valid[1]", "FlexibleSUSY", 20, 0., 2.);
-   valid[2] = new TH1D("valid[2]", "SPheno"      , 20, 0., 2.);
-   valid[3] = new TH1D("valid[3]", "SPhenoMSSM"  , 20, 0., 2.);
+   valid[0] = new TH1D("valid[0]", "Softsusy"    , 20, xmin, xmax);
+   valid[1] = new TH1D("valid[1]", "FlexibleSUSY", 20, xmin, xmax);
+   valid[2] = new TH1D("valid[2]", "SPheno"      , 20, xmin, xmax);
+   valid[3] = new TH1D("valid[3]", "SPhenoMSSM"  , 20, xmin, xmax);
 
-   invalid[0] = new TH1D("invalid[0]", "Softsusy"    , 20, 0., 2.);
-   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY", 20, 0., 2.);
-   invalid[2] = new TH1D("invalid[2]", "SPheno"      , 20, 0., 2.);
-   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"  , 20, 0., 2.);
+   invalid[0] = new TH1D("invalid[0]", "Softsusy"    , 20, xmin, xmax);
+   invalid[1] = new TH1D("invalid[1]", "FlexibleSUSY", 20, xmin, xmax);
+   invalid[2] = new TH1D("invalid[2]", "SPheno"      , 20, xmin, xmax);
+   invalid[3] = new TH1D("invalid[3]", "SPhenoMSSM"  , 20, xmin, xmax);
 
    for (int i = 0; i < NSG; i++) {
       combined[i]->SetStats(0);
