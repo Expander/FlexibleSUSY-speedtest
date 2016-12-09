@@ -151,15 +151,15 @@ void talk(const std::string& filename = "data.dat",
    }
 
    std::vector<TH1D*> nofv_hists;
-   nofv_hists.push_back(valid[4]); // FS
-   nofv_hists.push_back(valid[2]); // SP
-   nofv_hists.push_back(valid[0]); // SS
+   nofv_hists.push_back(combined[4]); // FS
+   nofv_hists.push_back(combined[2]); // SP
+   nofv_hists.push_back(combined[0]); // SS
 
    draw("CMSSM w/o sfermion flavour violation", nofv_hists, "benchmark_nofv");
 
    std::vector<TH1D*> fv_hists;
-   fv_hists.push_back(valid[1]); // FS
-   fv_hists.push_back(valid[3]); // S/SP
+   fv_hists.push_back(combined[1]); // FS
+   fv_hists.push_back(combined[3]); // S/SP
 
    draw("CMSSM w/ sfermion flavour violation", fv_hists, "benchmark_fv");
 }
