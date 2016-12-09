@@ -69,7 +69,7 @@ void talk(const std::string& filename = "data.dat",
    }
 
    const int NSG = 5;
-   const double range_start = 0., range_stop = 1.;
+   const double range_start = 0., range_stop = 0.7;
    TH1D* combined[NSG];
    TH1D* valid[NSG];
    TH1D* invalid[NSG];
