@@ -116,10 +116,10 @@ printf "\n"
 while [ true ]
 do
     # create point
-    m0=`$random_float 50 1000`
-    m12=`$random_float 50 1000`
+    m0=`$random_float 50 2000`
+    m12=`$random_float 50 2000`
     a0=`$random_float -1000 1000`
-    tan_beta=`$random_float 1 100`
+    tan_beta=`$random_float 1 50`
     sign_mu=`$random_sign`
 
     rm -f out.spc SPheno.spc SPheno.spc.MSSM SPheno.out Messages.out
